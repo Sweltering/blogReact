@@ -3,6 +3,8 @@ import "../css/login.css";
 import UserService from "../service/user";
 import {observer} from "mobx-react"
 import {Link, Redirect} from "react-router-dom"
+import {message} from "antd";
+import "antd/lib/message/style";
 
 const userService = new UserService();  // 创建服务UserService的实例，注入到Login的属性中去
 
@@ -26,6 +28,11 @@ class _Login extends React.Component {
     render() {
         if (this.props.service.loggedin) {  // 观察者发现Loggedin发生改变，实现登录页面跳转到首页
             return <Redirect to="/" />;
+        }
+
+        if (this.props.service.errMsg) {  // 观察者发现errMsg发生改变，提示登录失败
+            message.info(this.props.service.errMsg, 3, 
+                () => this.props.service.errMsg = "");
         }
         return (
             <div className="login-page">

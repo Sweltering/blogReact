@@ -3,9 +3,10 @@ import "../css/login.css";
 import UserService from "../service/user";
 import {observer} from "mobx-react"
 import {Link, Redirect} from "react-router-dom"
+import {message} from "antd";
+import "antd/lib/message/style";
 
 const userService = new UserService();
-
 
 export default class Reg extends React.Component {
     render() {
@@ -25,6 +26,12 @@ class _Reg extends React.Component {
     render() {
         if (this.props.service.reged) {  // 观察者发现reged发生改变，实现注册页面跳转到登录页
             return <Redirect to="/login" />;
+        }
+
+        if (this.props.service.errMsg) {  // 观察者发现errMsg发生改变，提示注册失败的信息
+            message.info(this.props.service.errMsg, 3,
+                () => this.props.service.errMsg=""
+            )
         }
         return (
             <div className="reg-page">

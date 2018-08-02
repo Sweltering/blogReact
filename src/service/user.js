@@ -7,8 +7,9 @@ store.addPlugin(require("store/plugins/expire"))
 
 // 负责业务逻辑处理，调用Model层数据操作函数
 export default class UserService {
-    @observable loggedin = false;  // 被观察着,如果这个发生变化，观察者会看到
-    @observable reged = false;  // 注册被观察者
+    @observable loggedin = false;  // 是否登录观察状态
+    @observable reged = false;  // 是否注册观察状态
+    @observable errMsg = "";  // 登录，注册失败观察状态
 
     // 登录后台操作
     login (email, password) {
@@ -23,8 +24,9 @@ export default class UserService {
                 this.loggedin = true;
             }
         ).catch(
-            function(error) {
+            error => {
                 console.log(error);
+                this.errMsg = "login failed";
             }
         )
     }
@@ -42,6 +44,7 @@ export default class UserService {
         ).catch(
             error => {
                 console.log(error)
+                this.errMsg = "register failed"
             }
         )
     }
