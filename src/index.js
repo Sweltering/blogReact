@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import {Route, BrowserRouter as Router} from "react-router-dom"
-import Login from "./component/login"
+import {Route, BrowserRouter as Router} from "react-router-dom";
+import Login from "./component/login";
+import Reg from "./component/reg";
 
 const Home = () => (
   <div>
@@ -16,6 +17,7 @@ const App = () => (
       {/* Route负责静态路由，exact严格匹配路径，path是路径 */}
       <Route path="/" component={Home} />
       <Route path="/login" component={Login} />
+      <Route path="/reg" component={Reg} />
     </div>
   </Router>
 )

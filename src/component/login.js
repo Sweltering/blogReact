@@ -2,7 +2,7 @@ import React from "react";
 import "../css/login.css";
 import UserService from "../service/user";
 import {observer} from "mobx-react"
-import {Redirect} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom"
 
 const userService = new UserService();  // 创建服务UserService的实例，注入到Login的属性中去
 
@@ -38,7 +38,7 @@ class _Login extends React.Component {
                         <input type="password" placeholder="password"/>
                         {/* 登录按钮点击操作，触发handleClick函数 */}
                         <button onClick={this.handleClick.bind(this)}>login</button> 
-                        <p className="message">Not registered? <a href="#">Create an account</a></p>
+                        <p className="message">Not registered? <Link to="/reg">Create an account</Link></p>
                     </form>
                 </div>
             </div>
